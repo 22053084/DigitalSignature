@@ -19,6 +19,8 @@
     <form action="LoginServlet" class="form-signin"  method="POST">
         <%--@declare id="password"--%><%--@declare id="email"--%>
         <h2 class="form-signin-heading">Login to your Digital Document Signing Account (ORIGNAL) </h2>
+        <h2 class="form-signin-heading">Login to your Digital Document Signing Account (2nd change) </h2>
+        <h2 class="form-signin-heading">Login to your Digital Document Signing Account (3rd change) </h2>
         <label for="email" class="sr-only">Email address</label>
             <input type="email" name="email" class="form-control" placeholder="Email address" required autofocus>
         <label for="password" class="sr-only">Password</label>
