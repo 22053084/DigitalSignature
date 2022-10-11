@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="none" name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Test">
+  </test> <!-- Test -->
+</suite> <!-- Failed suite [Suite] -->
