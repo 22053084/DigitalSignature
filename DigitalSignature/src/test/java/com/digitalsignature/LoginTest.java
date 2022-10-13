@@ -1,128 +1,117 @@
-/**
- * 
- */
 package com.digitalsignature;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.sql.Timestamp;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
-/**
- * @author RYUGEKI
- *
- */
+import com.digitalsignature.login.Login;
+
 class LoginTest {
 
-	/**
-	 * @throws java.lang.Exception
-	 */
+	private Login login1;
+	private Login login2;
+	
 	@BeforeEach
 	void setUp() throws Exception {
+		// Arrange
+		login2 = new Login("Donald Trump", "123", "xxx@xxx.com", new Timestamp(System.currentTimeMillis()));
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterEach
-	void tearDown() throws Exception {
-	}
-
-	/**
-	 * Test method for {@link com.digitalsignature.login.Login#Login(java.lang.String, java.lang.String, java.lang.String, java.sql.Timestamp)}.
-	 */
 	@Test
-	void testLoginStringStringStringTimestamp() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link com.digitalsignature.login.Login#Login()}.
-	 */
-	@Test
+	@Order(1)
 	void testLogin() {
-		fail("Not yet implemented");
+		login1 = new Login();
+		
+	    System.out.println("@TestLogin: new Login()");
+	    assertTrue(true);  // try true and false
 	}
 
 	/**
 	 * Test method for {@link com.digitalsignature.login.Login#getLoginName()}.
 	 */
 	@Test
+	@Order(2)
 	void testGetLoginName() {
-		fail("Not yet implemented");
+		assertEquals ("Donald Trump", login2.getLoginName());
 	}
 
 	/**
 	 * Test method for {@link com.digitalsignature.login.Login#setName(java.lang.String)}.
 	 */
 	@Test
+	@Order(3)
 	void testSetName() {
-		fail("Not yet implemented");
+		login2.setName("Donald Trump");
+		assertEquals ("Donald Trump", login2.getLoginName());
+	}
+	@AfterEach
+	void tearDown() throws Exception {
 	}
 
+
+	/**
+	 * Test method for {@link com.digitalsignature.login.Login#setEmail(java.lang.String)}.
+	 */
+	@Test
+	@Order(4)
+	void testSetEmail() {
+		login2.setEmail("xxx@xxx.com");
+		assertEquals ("xxx@xxx.com", login2.getEmail());
+	}
+	
 	/**
 	 * Test method for {@link com.digitalsignature.login.Login#getPassword()}.
 	 */
 	@Test
+	@Order(5)
 	void testGetPassword() {
-		fail("Not yet implemented");
+		assertEquals ("123", login2.getPassword());
 	}
 
 	/**
 	 * Test method for {@link com.digitalsignature.login.Login#setPassword(java.lang.String)}.
 	 */
 	@Test
+	@Order(6)
 	void testSetPassword() {
-		fail("Not yet implemented");
+		login2.setPassword("123");
+		assertEquals ("123", login2.getPassword());
 	}
 
 	/**
 	 * Test method for {@link com.digitalsignature.login.Login#getEmail()}.
 	 */
 	@Test
+	@Order(7)
 	void testGetEmail() {
-		fail("Not yet implemented");
+		assertEquals ("xxx@xxx.com", login2.getEmail());
 	}
 
 	/**
 	 * Test method for {@link com.digitalsignature.login.Login#getUserID()}.
 	 */
 	@Test
+	@Order(8)
 	void testGetUserID() {
-		fail("Not yet implemented");
+		assertEquals ("0", String.valueOf(login2.getUserID()));
 	}
 
-	/**
-	 * Test method for {@link com.digitalsignature.login.Login#setEmail(java.lang.String)}.
-	 */
-	@Test
-	void testSetEmail() {
-		fail("Not yet implemented");
-	}
-
+	
 	/**
 	 * Test method for {@link com.digitalsignature.login.Login#getLastLogin()}.
 	 */
 	@Test
+	@Order(9)
 	void testGetLastLogin() {
-		fail("Not yet implemented");
+		assertNotNull(login2.getLastLogin());
 	}
-
-	/**
-	 * Test method for {@link com.digitalsignature.login.Login#setLastLogin(java.sql.Timestamp)}.
-	 */
-	@Test
-	void testSetLastLogin() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link com.digitalsignature.login.Login#setUserID(int)}.
-	 */
-	@Test
-	void testSetUserID() {
-		fail("Not yet implemented");
-	}
-
 }
