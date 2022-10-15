@@ -27,7 +27,7 @@
                 <c:out value='${message}' />
             </c:if>
             </p>
-        <button class="btn btn-lg btn-primary btn-block" name="login-btn" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" name="login-btn" data-testid="tselectionSpinbuttonPlus" type="submit">Sign in</button>
     </form>
     <div class="container text-center">
         <!-- Add new user button redirects to the register.jsp page -->
