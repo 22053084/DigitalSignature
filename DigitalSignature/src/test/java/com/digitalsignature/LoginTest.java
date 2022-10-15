@@ -1,5 +1,13 @@
 package com.digitalsignature;
 
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.assertTrue;
+
+import org.testng.AssertJUnit;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -10,7 +18,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import com.digitalsignature.login.Login;
@@ -20,6 +27,7 @@ class LoginTest {
 	private Login login1;
 	private Login login2;
 	
+	@BeforeMethod
 	@BeforeEach
 	void setUp() throws Exception {
 		// Arrange
@@ -32,7 +40,7 @@ class LoginTest {
 		login1 = new Login();
 		
 	    System.out.println("@TestLogin: new Login()");
-	    assertTrue(true);  // try true and false
+	    AssertJUnit.assertTrue(true);  // try true and false
 	}
 
 	/**
@@ -53,6 +61,7 @@ class LoginTest {
 		login2.setName("Donald Trump");
 		assertEquals ("Donald Trump", login2.getLoginName());
 	}
+	@AfterMethod
 	@AfterEach
 	void tearDown() throws Exception {
 	}
@@ -112,6 +121,6 @@ class LoginTest {
 	@Test
 	@Order(9)
 	void testGetLastLogin() {
-		assertNotNull(login2.getLastLogin());
+		AssertJUnit.assertNotNull(login2.getLastLogin());
 	}
 }

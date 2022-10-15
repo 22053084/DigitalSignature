@@ -1,5 +1,7 @@
 package com.digitalsignature;
 
+import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -24,7 +26,7 @@ public class LoginWebTest {
 		  webDriver.navigate().to("http://localhost:8090/DigitalSignature");
 		  
 		  //Assert the title to check that we are indeed in the correct website
-		  Assert.assertEquals(webDriver.getTitle(), "Digital Signature");
+		  AssertJUnit.assertEquals(webDriver.getTitle(), "Digital Signature");
 		  
 		  System.out.println("title: "+webDriver.getTitle());
 		  
@@ -36,7 +38,7 @@ public class LoginWebTest {
 		  webDriver.findElement(By.name("login-btn")).sendKeys(Keys.ENTER);
 
 		  //Assert the new title to check that the title is the dashboard and the button click had successfully bring us to the dashboard
-		  Assert.assertTrue(webDriver.getTitle().contains("Welcome to Digital Signature - Dashboard"));
+		  AssertJUnit.assertTrue(webDriver.getTitle().contains("Welcome to Digital Signature - Dashboard"));
 		  System.out.println("Login: "+webDriver.getTitle());
 	  }
 	  
@@ -54,7 +56,7 @@ public class LoginWebTest {
 	  @AfterTest
 	  public void afterTest() {
 		  //Quit the ChromeDriver and close all associated window at the end of test
-		  webDriver.quit();	
+		  //webDriver.quit();	
 	  }
 
 }

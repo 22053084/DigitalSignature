@@ -20,7 +20,7 @@
 		<!-- Jacoco -->
 		<jacoco.groupId>org.jacoco</jacoco.groupId>
 		<jacoco.artifactId>jacoco-maven-plugin</jacoco.artifactId>
-		<jacoco.version>0.8.8</jacoco.version>
+		<jacoco.version>0.8.7</jacoco.version>
 
         <!-- SonarQube properties -->
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
@@ -43,6 +43,11 @@
 		<junit-jupiter.artifactId>junit-jupiter</junit-jupiter.artifactId>
 		<junit-jupiter.version>5.7.0</junit-jupiter.version>
         
+        
+        <jacoco.it.execution.data.file>${project.build.directory}/coverage-reports/jacoco-it.exec</jacoco.it.execution.data.file>
+		<jacoco.ut.execution.data.file>${project.build.directory}/coverage-reports/jacoco-ut.exec</jacoco.ut.execution.data.file>
+		<jacoco.execution.data.file>${project.build.directory}/coverage-reports/jacoco.exec</jacoco.execution.data.file>
+
     </properties>
     
 	<repositories>
@@ -112,7 +117,7 @@
 		<dependency>
 			<groupId>org.jacoco</groupId>
 			<artifactId>jacoco-maven-plugin</artifactId>
-			<version>0.8.6</version>
+			<version>0.8.7</version>
 		</dependency>
 		
 		
@@ -166,6 +171,17 @@
   <build>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
+		<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.3.2</version>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.tomcat.maven</groupId>
+            <artifactId>tomcat7-maven-plugin</artifactId>
+            <version>2.2</version>
+        </plugin>        
+        
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
@@ -184,6 +200,9 @@
 			<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.22.1</version>
 					<configuration>
+						<!-- try to set methods in parallel>
+					        <parallel>methods</parallel>
+					        <threadCount>5</threadCount> -->
 						<argLine>
         					--add-opens java.base/java.lang=ALL-UNNAMED
 						</argLine>
@@ -193,6 +212,20 @@
 							</suiteXmlFile>
 						</suiteXmlFiles>
 					</configuration>
+					    <dependencies>
+			        <!--
+			        <dependency>
+			            <groupId>org.apache.maven.surefire</groupId>
+			            <artifactId>surefire-junit47</artifactId>
+			            <version>2.22.1</version>
+			        </dependency>
+			        <dependency>
+			            <groupId>org.apache.maven.surefire</groupId>
+			            <artifactId>surefire-testng</artifactId>
+			            <version>2.22.1</version>
+			        </dependency>
+			        -->
+				    </dependencies>
 		</plugin>
         
         <plugin>
@@ -222,67 +255,57 @@
 			<groupId>org.sonarsource.scanner.maven</groupId>
 			<artifactId>sonar-maven-plugin</artifactId>
         </plugin>
-        <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.7</version>
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>prepare-agent</goal>
-                    </goals>
-                </execution>
-                <execution>
-                    <id>jacoco-report</id>
-                    <phase>test</phase>
-                    <goals>
-                        <goal>report</goal>
-                    </goals>
-                    <!-- default target/site/jacoco/* -->
-                    <configuration>
-                        <outputDirectory>target/site/jacoco-report</outputDirectory>
-                        <skip>${jacoco.skip}</skip>
-                    </configuration>
-                </execution>
-                <!-- Add this part for specify rules of checking -->
-                <execution>
-                    <id>jacoco-check</id>
-                    <goals>
-                        <goal>check</goal>
-                    </goals>
-                </execution>
-                <!--Added for code coverage report aggregation, This is an optional Tag. Not mandatory -->
-                <execution>
-                    <id>report-aggregate</id>
-                    <phase>verify</phase>
-                    <goals>
-                        <goal>report-aggregate</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
         
-	            <plugin>
-	                <groupId>org.apache.maven.plugins</groupId>
-	                <artifactId>maven-war-plugin</artifactId>
-	                <version>3.3.2</version>
-	            </plugin>
-	     
-	            
-	            <plugin>
-	                <groupId>org.apache.tomcat.maven</groupId>
-	                <artifactId>tomcat7-maven-plugin</artifactId>
-	                <version>2.2</version>
-	            </plugin>        
         
+        	<plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.7</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <!-- default target/site/jacoco/* -->
+                        <configuration>
+                            <outputDirectory>/target/site/jacoco-report</outputDirectory>
+                            <skip>${jacoco.skip}</skip>
+                        </configuration>
+                    </execution>
+                    <!-- Add this part for specify rules of checking -->
+                    <execution>
+                        <id>jacoco-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                    <!--Added for code coverage report aggregation, This is an optional Tag. Not mandatory -->
+                    <execution>
+                        <id>report-aggregate</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report-aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+       
+       
+       
         
       </plugins>
     </pluginManagement>
   </build>
   
   
-  
-     <profiles>
+   <profiles>
 	    <profile>
 	        <id>sonar</id>
 	        <activation>
@@ -307,11 +330,9 @@
 	            -->
 	         
 	            <sonar.coverage.jacoco.xmlReportPaths>
-	                ${project.basedir}/target/site/jacoco-report/jacoco.xml
+	                ${basedir}/target/site/jacoco-report/jacoco.xml
 	            </sonar.coverage.jacoco.xmlReportPaths>
 	        </properties>
 	    </profile>
 	</profiles>
-	
-	
 </project>

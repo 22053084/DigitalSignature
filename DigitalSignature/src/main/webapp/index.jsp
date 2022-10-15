@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +14,6 @@
 
 <div class="container">
     <img alt="Group" class="login-image" src="static/media/loginIcon.png">
-    <!--form class="form-signin" action="loginSuccess.jsp"  method="POST"-->
     <form action="LoginServlet" class="form-signin"  method="POST">
         <%--@declare id="password"--%><%--@declare id="email"--%>
         <h2 class="form-signin-heading">Login to your Digital Document Signing Account </h2>
